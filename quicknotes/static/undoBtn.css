@@ -11,9 +11,7 @@ button#undoBtn {
     border-radius: 30px;
     font-size: 20px;
     font-weight: 600;
-    color: var(--text);
     background-size: 100% 100%;
-    box-shadow: 0 0 0 7px var(--dark) inset;
     margin-bottom: 15px;
 
     bottom: 1rem;

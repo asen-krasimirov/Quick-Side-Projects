@@ -1,5 +1,6 @@
 import { createNote, deleteNote, getNotesByUser, logOutUser, updateNote } from "../api/data.js";
-import { html, page } from "../lib.js";
+import { html, page, render } from "../lib.js";
+import { loadingElement } from "./components/loadingElem.js";
 
 
 const loggedPageTemplate = ({ notesData, addNote, onEdit, onDelete }) => html`
@@ -11,7 +12,7 @@ const loggedPageTemplate = ({ notesData, addNote, onEdit, onDelete }) => html`
         <i class="fas fa-plus"></i> add note
     </button>
 
-    <div id="noteHolder">
+    <div id="noteHolder" class="container">
         ${notesData.map((data, index) => noteTemplate({ data, index, addNote, onEdit, onDelete }))}
     </div>
 
@@ -21,7 +22,7 @@ const loggedPageTemplate = ({ notesData, addNote, onEdit, onDelete }) => html`
 
 
 const noteTemplate = ({ data, index, addNote, onEdit, onDelete }) => html`
-<div id=${`note-` + index} class="note">
+<div id=${`note-` + index} class="note draggable" draggable="true">
     <div class="tools">
         <button class="addNote" @click=${() => addNote()}><i class="fas fa-plus"></i></button>
 
@@ -32,21 +33,32 @@ const noteTemplate = ({ data, index, addNote, onEdit, onDelete }) => html`
         <button class="delete" @click=${event=> { onDelete(data.objectId, event.target.parentNode.parentNode.parentNode)
             }}><i class="fas fa-trash-alt"></i></button>
     </div>
-    <textarea class="main" disabled>${data.text}</textarea>
+    <textarea class="main disable-select" disabled>${data.text}</textarea>
     <textarea class="text" style="display: none;"></textarea>
 </div>`
 
 
 export async function showLoggedPage(context) {
-    let ownerId = sessionStorage.userId;
-    const notesData = await getNotesByUser(ownerId);
+    let ownerId;
+    let notesData;
 
-    renderPage();
-    document.getElementById("logoutBtn").addEventListener("click", onLogout);
-    const undoBtn = document.getElementById("undoBtn");
+    let undoBtn;
+
+    try {
+        
+        context.renderContent(loadingElement());
+        ownerId = sessionStorage.userId;
+        notesData = await getNotesByUser(ownerId);
+    
+        renderPage();
+        document.getElementById("logoutBtn").addEventListener("click", onLogout);
+        undoBtn = document.getElementById("undoBtn");
+
+    } catch (error) { alert(error.message); }
+
 
     // make notes moveable;
-    // attachMovingListeners();
+    // makeElementsDraggable();
 
     function renderPage() {
         context.renderContent(loggedPageTemplate({ notesData, addNote, onEdit, onDelete, onSave }));
@@ -120,32 +132,6 @@ export async function showLoggedPage(context) {
         notesData.push({ objectId: response.objectId, text });
         renderPage();
     }
-
-    /*
-    function attachMovingListeners() {
-        const defaultDragValue = createElement("div");
-        let dragValue = defaultDragValue;
-
-        notesData.forEach((_, index) => makeMovable(index));
-
-        function makeMovable(index) {
-            const element = document.getElementById(`note-` + index);
-            element.style.position = "absolute";
-            element.addEventListener("mousedown", () => dragValue = element);
-        }
-
-        document.addEventListener("mouseover", event => {
-            let x = event.pageX;
-            let y = event.pageY;
-
-            dragValue.style.left = x + "px";
-            dragValue.style.top = y + "px";
-        });
-
-        document.addEventListener("mouseup", () => dragValue = defaultDragValue);
-    }
-    */
-
 }
 
 async function onLogout() {

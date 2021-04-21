@@ -6,7 +6,8 @@ export {
     html,
     render,
     page,
-    createElement
+    createElement,
+    // makeElementsDraggable
 };
 
 
@@ -25,4 +26,54 @@ function createElement(type, attributes={}, children=[]) {
     });
 
     return newElem;
+}
+
+
+function makeElementsDraggable() {
+
+    /* 
+        Open source code from: Web Dev Simplified
+        Making HTML elements draggable
+    */
+
+    const draggables = document.querySelectorAll('.draggable')
+    const containers = document.querySelectorAll('.container')
+    
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging')
+        })
+    
+        draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging')
+        })
+    })
+    
+    containers.forEach(container => {
+        container.addEventListener('dragover', e => {
+            e.preventDefault()
+            const afterElement = getDragAfterElement(container, e.clientX - 50)
+            const draggable = document.querySelector('.dragging')
+
+            if (afterElement == null) {
+                container.appendChild(draggable)
+            } else {
+                container.insertBefore(draggable, afterElement)
+            }
+            
+        })
+    })
+    
+    function getDragAfterElement(container, x) {
+        const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+        return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect()
+        const offset = x - box.top - box.right / 2
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child }
+        } else {
+            return closest
+        }
+        }, { offset: Number.NEGATIVE_INFINITY }).element
+    }
 }
