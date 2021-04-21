@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes App</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/signInForm.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script> -->
+    <script src="/src/app.js" type="module"></script>
+
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+        // Single Page Apps for GitHub Pages
+        // MIT License
+        // https://github.com/rafgraph/spa-github-pages
+        // This script checks to see if a redirect is present in the query string,
+        // converts it back into the correct url and adds it to the
+        // browser's history using window.history.replaceState(...),
+        // which won't cause the browser to attempt to load the new url.
+        // When the single page app is loaded further down in this file,
+        // the correct url will be waiting in the browser's history for
+        // the single page app to route accordingly.
+        (function (l) {
+            if (l.search[1] === '/') {
+                var decoded = l.search.slice(1).split('&').map(function (s) {
+                    return s.replace(/~and~/g, '&')
+                }).join('?');
+                window.history.replaceState(null, null,
+                    l.pathname.slice(0, -1) + decoded + l.hash
+                );
+            }
+        }(window.location))
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+
+</head>
+
+<body>
+
+    <!-- content is displayed here -->
+    <main>
+
+    </main>
+
+    <div id="views">
+
+        <!-- home page -->
+        <!-- <section id="homePage container">
+            <div class="note child">
+                <div class="tools">
+                    <button class="addNote" disabled style="pointer-events: none;"><i class="fas fa-plus"></i></button>
+                    <button class="edit" disabled style="pointer-events: none;"><i class="fas fa-edit"></i></button>
+                    <button class="delete" disabled style="pointer-events: none;"><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <a href="/login" id="loginBtn" class="customBtn">Sign In</a>
+                <textarea class="main" disabled>
+
+Welcome to Quick Notes...
+
+The place where you can quickly store your thoughts.
+
+Just sign in and you are set.
+                </textarea>
+            </div>
+        </section> -->
+        
+        <!-- login page -->
+        <!-- <section id="loginPage container">
+            <div class="note child">
+                <div class="tools">
+                    <button class="addNote" disabled style="pointer-events: none;"><i class="fas fa-plus"></i></button>
+                    <button class="edit" disabled style="pointer-events: none;"><i class="fas fa-edit"></i></button>
+                    <button class="delete" disabled style="pointer-events: none;"><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <div class="main container" disabled>
+                    <pre>
+      Sign In here or click <a href="#">here</a>
+    if you haven't registered yet.
+                    </pre>
+                    <form class="authentication" id="formContent">
+                        <input type="text" id="login" class="fadeIn second" name="login" placeholder="email">
+                        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+                        <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+                    </form>
+                </div>
+            </div>
+        </section> -->
+        
+        <!-- register page -->
+        <!-- <section id="registerPage container">
+            <div class="note child">
+                <div class="tools">
+                    <button class="addNote" disabled style="pointer-events: none;"><i class="fas fa-plus"></i></button>
+                    <button class="edit" disabled style="pointer-events: none;"><i class="fas fa-edit"></i></button>
+                    <button class="delete" disabled style="pointer-events: none;"><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <div class="main container" disabled>
+                    <pre>
+  Register here or go back to <a href="#">Login</a>
+                    </pre>
+                    <form class="authentication" id="formContent">
+                        <input type="text" id="login" class="fadeIn second" name="login" placeholder="email">
+                        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+                        <input type="password" id="rePass" class="fadeIn third" name="rePass" placeholder="repeat password">
+                        <button type="submit"><i class="fas fa-sign-in-alt"></i> Register</button>
+                    </form>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- main page -->
+        <!-- <section id="loggedInView">
+            <button class="customBtn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            <button class="add customBtn" id="add">
+                <i class="fas fa-plus"></i> Add note
+            </button>
+        
+            note template
+            <div class="note">
+                <div class="tools">
+                    <button class="addNote"><i class="fas fa-plus"></i></button>
+                    <button class="edit"><i class="fas fa-edit"></i></button>
+                    <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <textarea class="main" disabled></textarea>
+                <textarea class="text"></textarea>
+            </div>
+        </section> -->
+
+    </div>
+
+</body>
+
+</html>
