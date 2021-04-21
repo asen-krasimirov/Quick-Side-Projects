@@ -12,13 +12,13 @@ const loginPageTemplate = (onSubmit) => html`
         </div>
         <div class="main container" disabled>
             <pre>
-Sign In here or click <a href="/register">here</a>
+sign In here or click <a href="/register">here</a>
 if you haven't registered yet.
             </pre>
             <form class="authentication" id="formContent" @submit=${onSubmit}>
                 <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-                <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+                <button type="submit"><i class="fas fa-sign-in-alt"></i> login</button>
             </form>
         </div>
     </div>

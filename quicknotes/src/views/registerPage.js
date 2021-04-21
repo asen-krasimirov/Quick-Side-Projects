@@ -12,13 +12,13 @@ const registerPageTemplate = (onSubmit) => html`
         </div>
         <div class="main container" disabled>
             <pre>
-Register here or go back to <a href="/login">Login</a>
+register here or go back to <a href="/login">login</a>
             </pre>
             <form class="authentication" id="formContent" @submit=${onSubmit}>
                 <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
                 <input type="password" id="rePass" class="fadeIn third" name="rePass" placeholder="repeat password">
-                <button type="submit"><i class="fas fa-sign-in-alt"></i> Register</button>
+                <button type="submit"><i class="fas fa-sign-in-alt"></i> register</button>
             </form>
         </div>
     </div>

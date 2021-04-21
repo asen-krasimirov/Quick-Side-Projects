@@ -11,7 +11,7 @@ export async function authenticate(body, isRegistering=true) {
         let response = await responseFunc(body);
         sessionStorage.authToken = response.sessionToken;
         sessionStorage.userId = response.objectId;
-    
+
     } catch(error) {
         throw new Error(errorMessage);
     }

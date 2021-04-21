@@ -1,26 +1,29 @@
 import { createNote, deleteNote, getNotesByUser, logOutUser, updateNote } from "../api/data.js";
-import { createElement, html, page } from "../lib.js";
+import { html, page } from "../lib.js";
 
 
 const loggedPageTemplate = ({ notesData, addNote, onEdit, onDelete }) => html`
 <section id="loggedInView">
     <button class="customBtn" id="logoutBtn">
-        <i class="fas fa-sign-out-alt"></i> Logout
+        <i class="fas fa-sign-out-alt"></i> logout
     </button>
-    <button class="add customBtn" id="add" @click=${addNote}>
-        <i class="fas fa-plus"></i> Add note
+    <button class="add customBtn" id="add" @click=${() => addNote()}>
+        <i class="fas fa-plus"></i> add note
     </button>
 
     <div id="noteHolder">
         ${notesData.map((data, index) => noteTemplate({ data, index, addNote, onEdit, onDelete }))}
     </div>
+
+    <button id="undoBtn" class="hidden">click to undo</button>
+
 </section>`;
 
 
 const noteTemplate = ({ data, index, addNote, onEdit, onDelete }) => html`
 <div id=${`note-` + index} class="note">
     <div class="tools">
-        <button class="addNote" @click=${addNote}><i class="fas fa-plus"></i></button>
+        <button class="addNote" @click=${() => addNote()}><i class="fas fa-plus"></i></button>
 
         <button class="edit" @click=${event=> onEdit(data.objectId, event.target.parentNode.parentNode)}><i
                 class="fas fa-edit"></i></button>
@@ -40,7 +43,8 @@ export async function showLoggedPage(context) {
 
     renderPage();
     document.getElementById("logoutBtn").addEventListener("click", onLogout);
-    
+    const undoBtn = document.getElementById("undoBtn");
+
     // make notes moveable;
     // attachMovingListeners();
 
@@ -78,21 +82,42 @@ export async function showLoggedPage(context) {
 
     async function onSave(id, text) {
         await updateNote(id, { text });
+        const note = notesData.find(elem => elem.objectId === id);
+        note.text = text;
     }
 
     async function onDelete(id, target) {
         target = (target.className == "tools") ? target.parentNode : target;
-        target = (target.className == "") ? target.children[notesData.indexOf(notesData.find(elem => elem.objectId === id))] : target;
+        const note = notesData.find(elem => elem.objectId === id);
+        target = (target.className == "") ? target.children[notesData.indexOf(note)] : target;
+
         // add undo button
-        if (confirm('add undo')) {
-            target.remove();
-            await deleteNote(id);
+        target.remove();
+        await deleteNote(id);
+        displayUndo(note.text);
+    }
+
+    function displayUndo(text) {
+        undoBtn.classList.remove("hidden");
+
+        undoBtn.addEventListener("click", onClick);
+
+        setTimeout(hideBtn, 7000);
+
+        function onClick() { 
+            addNote(text);
+            hideBtn();
+        }
+
+        function hideBtn() {
+            undoBtn.removeEventListener("click", onClick);
+            undoBtn.classList.add("hidden");
         }
     }
 
-    async function addNote() {
-        const response = await createNote({ text: " "});
-        notesData.push({ objectId: response.objectId, text: " " });
+    async function addNote(text=" ") {
+        const response = await createNote({ text });
+        notesData.push({ objectId: response.objectId, text });
         renderPage();
     }
 
@@ -124,7 +149,7 @@ export async function showLoggedPage(context) {
 }
 
 async function onLogout() {
-    sessionStorage.clear();
     await logOutUser();
+    sessionStorage.clear();
     page.redirect("/home");
 }

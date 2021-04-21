@@ -28,6 +28,7 @@ function addPointer(className, objectId) {
 
 
 /* authentication requests */
+
 export async function registerUser(body, headers={ 'X-Parse-Revocable-Session': '1' }) {
     return await api.postData(endpoints.register, body, headers);
 }
@@ -37,11 +38,12 @@ export async function loginUser(body, headers={ 'X-Parse-Revocable-Session': '1'
 }
 
 export async function logOutUser() {
-    return await api.postData(endpoints.logout);
+    return await api.postData(endpoints.logout, {});
 }
 
 
 /* Data Gathering */
+
 export async function getNotesByUser(userId) {
     let url = endpoints.notesCollection + `?where={"owner":${JSON.stringify(addPointer("_User", userId))}}`
     const result = (await api.getData(url))["results"];
@@ -50,6 +52,7 @@ export async function getNotesByUser(userId) {
 
 
 /* CRUD Operations */
+
 export async function deleteNote(noteId) {
     return await api.deleteRequest(endpoints.notesCollection + "/" + noteId);
 }

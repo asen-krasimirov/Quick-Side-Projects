@@ -9,14 +9,14 @@ const homePageTemplate = () => html`
             <button class="edit" disabled style="pointer-events: none;"><i class="fas fa-edit"></i></button>
             <button class="delete" disabled style="pointer-events: none;"><i class="fas fa-trash-alt"></i></button>
         </div>
-        <a href="/login" id="loginBtn" class="customBtn">Sign In</a>
+        <a href="/login" id="loginBtn" class="customBtn">sign in</a>
         <textarea class="main" disabled>
 
-Welcome to Quick Notes...
+welcome to Quick Notes...
 
-The place where you can quickly store your thoughts.
+the place where you can quickly store your thoughts.
 
-Just sign in and you are set.
+just sign in and you are set.
         </textarea>
     </div>
 </section>`;
