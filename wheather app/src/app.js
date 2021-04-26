@@ -14,7 +14,7 @@ setTimeout(initialize, 1);
 
 async function initialize() {
     cityInfo = await getCityData(latitude, longitude);
-    weatherInfo = (await getWeatherData(cityInfo.city)).current;
+    weatherInfo = (await getWeatherData(cityInfo.locality)).current;
 
     setInformation();
 }

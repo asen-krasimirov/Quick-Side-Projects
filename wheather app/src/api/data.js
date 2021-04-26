@@ -6,7 +6,7 @@ const api = createAPIDialog();
 /* Getting City Information */
 
 export async function getCityData(latitude, longitude) {
-    let url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude};`;
+    let url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`;
     return await api.getData(url);
 }
 
