@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Manager</title>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+
+    <!-- styling files -->
+    <link rel="stylesheet" href="/static/site.css" />
+    <link rel="stylesheet" href="/static/authenticationStyle.css" />
+    <link rel="stylesheet" href="/static/mainPageStyle.css" />
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script> -->
+    <script src="/src/app.js" type="module"></script>
+    
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+        // Single Page Apps for GitHub Pages
+        // MIT License
+        // https://github.com/rafgraph/spa-github-pages
+        // This script checks to see if a redirect is present in the query string,
+        // converts it back into the correct url and adds it to the
+        // browser's history using window.history.replaceState(...),
+        // which won't cause the browser to attempt to load the new url.
+        // When the single page app is loaded further down in this file,
+        // the correct url will be waiting in the browser's history for
+        // the single page app to route accordingly.
+        (function (l) {
+            if (l.search[1] === '/') {
+                var decoded = l.search.slice(1).split('&').map(function (s) {
+                    return s.replace(/~and~/g, '&')
+                }).join('?');
+                window.history.replaceState(null, null,
+                    l.pathname.slice(0, -1) + decoded + l.hash
+                );
+            }
+        }(window.location))
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+
+</head>
+
+<body>
+
+    <!-- content is displayed here -->
+    <main>
+
+    </main>
+
+    <section id="views">
+
+        <!-- Home Page -->
+        <!-- <section id="homePage" class="show">
+            <div class="main-container">
+                <h1>Password Manager</h1>
+                <p>Welcome to Password Manager!</p>
+                <p>Here is the place to keep your passwords secure!</p>
+                <a href="#">Join Now!</a>
+            </div>
+        </section> -->
+
+        <!-- Registration Page -->
+        <!-- <section id="register" class="authenticate">
+            <div class="main-container">
+                    <h1>Register</h1>
+                <form>
+                    <label>Username:&nbsp;<input class="smallBtn" type="text" name="username" /></label>
+                    <label>Password:&nbsp;&nbsp;<input class="smallBtn" type="password" name="password" /></label>
+                    <label>Repeat:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="smallBtn" type="password" name="repass" /></label>
+                    <input id="submitBtn" class="smallBtn" type="submit" value="Create Account" />
+                </form>
+                <footer>
+                    <p>Already have an account?</p>
+                    <a href="#">Sign in here</a>
+                </footer>
+            </div>
+        </section> -->
+        
+        <!-- Login Page -->
+        <section id="login" class="authenticate">
+            <div class="main-container">
+                    <h1>Login</h1>
+                <form>
+                    <label>Username:&nbsp;<input class="smallBtn" type="text" name="username" /></label>
+                    <label>Password:&nbsp;&nbsp;<input class="smallBtn" type="password" name="password" /></label>
+                    <input id="submitBtn" class="smallBtn" type="submit" value="Log in" />
+                </form>
+                <footer>
+                    <p>Don't have an account?</p>
+                    <a href="#">Sign up here</a>
+                </footer>
+            </div>
+        </section>
+
+        <!-- Main Page -->
+        <section id="mainPage">
+            <div class="main-container pass-container">
+                <h1>Saved Passwords</h1>
+                <input class="smallBtn passHolder" type="button" value="Google #1" />
+                <input class="smallBtn passHolder clickedHolder" type="text" value="lorem ipson dolore kornaval komar imson dolore koetat ihmanat tavan" />
+            </div>
+
+            <div class="main-container pass-generate">
+                <h1>Generate Password</h1>
+                <input class="smallBtn passHolder" type="text" placeholder="click Generate..." readonly />
+                <input class="smallBtn customRedBtn" type="button" value="Generate" />
+            </div>
+
+            
+            <div class="main-container pass-saver">
+                <h1>Save Password</h1>
+                <form>
+                    <input class="smallBtn passHolder" type="text" placeholder="Enter Save Name" />
+                    <input class="smallBtn passHolder" type="text" placeholder="Enter Password" />
+                    <input class="smallBtn customRedBtn" type="submit" value="Save" />
+                </form>
+            </div>
+        </section>
+
+    </section>
+</body>
+
+</html>
