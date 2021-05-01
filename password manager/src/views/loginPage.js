@@ -1,27 +1,26 @@
 import { html } from "../lib.js";
-import { registerUser } from "../api/data.js";
+import { loginUser } from "../api/data.js";
 
 
-const registerPageTemplate = (onSubmit) => html`
-<section id="register" class="authenticate">
+const loginPageTemplate = (onSubmit) => html`
+<section id="login" class="authenticate">
     <div class="main-container">
-            <h1>Register</h1>
+            <h1>Login</h1>
         <form @submit=${onSubmit}>
             <label>Username:&nbsp;<input class="smallBtn" type="text" name="username" /></label>
             <label>Password:&nbsp;&nbsp;<input class="smallBtn" type="password" name="password" /></label>
-            <label>Repeat:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="smallBtn" type="password" name="repass" /></label>
-            <input id="submitBtn" class="smallBtn" type="submit" value="Create Account" />
+            <input id="submitBtn" class="smallBtn" type="submit" value="Log in" />
         </form>
         <footer>
-            <p>Already have an account?</p>
-            <a href="/login">Sign in here</a>
+            <p>Don't have an account?</p>
+            <a href="/register">Sign up here</a>
         </footer>
     </div>
 </section>`;
 
 
-export function showRegisterPage(context) {
-    context.renderContent(registerPageTemplate(onSubmit));
+export function showLoginPage(context) {
+    context.renderContent(loginPageTemplate(onSubmit));
 
     async function onSubmit(event) {
         event.preventDefault();
@@ -31,25 +30,23 @@ export function showRegisterPage(context) {
 
         let username = formData.get("username");
         let password = formData.get("password");
-        let rePass = formData.get("repass");
 
         try {
             validate();
             
             try {
-
-                const response = await registerUser({ username, password });
+                
+                const response = await loginUser({ username, password });
                 sessionStorage.setItem("authToken", response.sessionToken);
                 sessionStorage.setItem("userId", response.objectId);
                 context.pageContent.redirect("/main");
 
-            } catch { alert("This username is already taken!"); }
+            } catch { alert("Check you username and password!"); }
 
         } catch (error) { alert(error.message); }
 
         function validate() {
-            if (!username || !password || !rePass) throw new Error("All fields are required!");
-            if (password != rePass) throw new Error("Both passwords must match!");
+            if (!username || !password) throw new Error("All fields are required!");
         }
     }
 }

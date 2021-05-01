@@ -13,10 +13,10 @@
     display: block;
     font-size: 20px;
 
-    width: 400px;
-    height: 70px;
+    width: 362px;
+    height: 32px;
     margin-top: 26px;
-
+    text-align: center;
 }
 
 .clickedHolder {
@@ -24,9 +24,7 @@
     background-color: white;
     color: #9d2525;
     border-color: #9d2525;
-    
-    width: 370px;
-    height: 40px;
+
 }
 
 .pass-container {
@@ -38,11 +36,15 @@
 
     width: 410px;
     height: 800px;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .pass-container h1 {
     font-size: 47px;
     margin-top: 0;
+    margin-left: 39px;
     text-align: center;
 }
 
@@ -141,4 +143,10 @@
     top: 85%;
     height: 56px;
     font-size: 25px;
+}
+
+/* Passwords Scrollbar */
+
+::-webkit-scrollbar {
+    width: 25px;
 }
