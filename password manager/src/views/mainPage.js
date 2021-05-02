@@ -1,12 +1,12 @@
-import { getAllPasswordsByUserId, logNewPassword, logoutUser } from "../api/data.js";
-import { html, page, createElement } from "../lib.js";
+import { getAllPasswordsByUserId, logNewPassword, logoutUser, deletePass } from "../api/data.js";
+import { html, page } from "../lib.js";
 
 
 const mainPageTemplate = ({ passwordCollection, onGenerate, onSave }) => html`
 <section id="mainPage">
     <div id="passHolder" class="main-container pass-container">
         <h1>Saved Passwords</h1>
-        ${passwordCollection.map(data => passwordTemplate(data.passName, data.passValue))}
+        ${passwordCollection.map(data => passwordTemplate(data.passName, data.passValue, data.objectId))}
     </div>
 
     <div class="main-container pass-generate">
@@ -28,8 +28,11 @@ const mainPageTemplate = ({ passwordCollection, onGenerate, onSave }) => html`
     <input class="smallBtn customRedBtn" type="button" id="logoutBtn" value="Logout" @click=${onLogout}>
 </section>`;
 
-const passwordTemplate = (name, password) => html`
-<input class="smallBtn passHolder" type="text" value=${name} @click=${event => onPassReview(event.target, password)} readonly/>
+const passwordTemplate = (name, password, passId) => html`
+<div>
+    <input class="smallBtn passHolder" type="text" value=${name} @click=${event => onPassReview(event.target, password)} readonly/>
+    <input class="smallBtn customRedBtn deleteBtn" value="Remove" type="button" @click=${event => onPasswordDelete(event.target.parentNode, passId)}>
+</div>
 `;
 
 function onPassReview(target, password) { 
@@ -57,8 +60,8 @@ export async function showMainPage(context) {
 
         try {
             
-            await logNewPassword({ passName, passValue, ownerId });
-            passwordCollection.push({ passName, passValue });
+            const response = (await logNewPassword({ passName, passValue, ownerId }));
+            passwordCollection.push({ passName, passValue, objectId: response.objectId });
             form.reset();
             renderPage();
 
@@ -76,4 +79,9 @@ async function onLogout() {
     await logoutUser();
     sessionStorage.removeItem("authToken");
     page.redirect("/home");
+}
+
+async function onPasswordDelete(target, passId) {
+    await deletePass(passId);
+    target.remove();
 }

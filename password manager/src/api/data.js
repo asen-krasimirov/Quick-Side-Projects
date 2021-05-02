@@ -39,3 +39,7 @@ export async function getAllPasswordsByUserId(userId) {
 export async function logNewPassword(body) {
     return await api.postRequest(endpoints.passwordCollectionURL, body);
 }
+
+export async function deletePass(passId) {
+    return await api.deleteRequest(endpoints.passwordCollectionURL + "/" + passId);
+}

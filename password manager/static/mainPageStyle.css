@@ -1,6 +1,5 @@
 
 /* General */
-
 .main-container h1 {        
     -webkit-text-fill-color: 0;
     -webkit-text-stroke-width: 0;
@@ -8,12 +7,12 @@
 }
 
 /* Pass Holder */
-
 .passHolder {
-    display: block;
+    display: inline;
     font-size: 20px;
+    margin-right: 0;
 
-    width: 362px;
+    width: 294px;
     height: 32px;
     margin-top: 26px;
     text-align: center;
@@ -34,11 +33,13 @@
     left: 21%;
     transform: translate(-50%, -50%);
 
-    width: 410px;
+    width: 500px;
     height: 800px;
 
     overflow-x: hidden;
     overflow-y: scroll;
+
+    padding: 25px 20px;
 }
 
 .pass-container h1 {
@@ -55,7 +56,6 @@
 }
 
 /* Pass Generator */
-
 .pass-generate {
     margin: 0;
     position: absolute;
@@ -96,7 +96,6 @@
 }
 
 /* Pass Saver */
-
 .pass-saver {
     margin: 0;
     position: absolute;
@@ -146,7 +145,17 @@
 }
 
 /* Passwords Scrollbar */
-
 ::-webkit-scrollbar {
     width: 25px;
+}
+
+
+/* Delete Buttons */
+.deleteBtn {
+    display: inline;
+    width: 75px;
+    margin: 0;
+
+    font-size: 15px;
+    text-align: center;
 }
