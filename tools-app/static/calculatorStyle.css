@@ -1,0 +1,49 @@
+
+
+#calculator {
+    background-color: #B2B2B2;
+
+    width: 560px;
+    height: 860px;
+    border-radius: 61px;
+
+
+}
+
+#display {
+    background-color: white;
+
+    width: 509px;
+    height: 107px;
+    border-radius: 61.36px;
+
+    position: relative;
+    top: 50px;
+    left: 30px;
+
+}
+
+#display input {
+    background: transparent;
+    border: none;
+
+    margin-left: 21px;
+    width: 500px;
+    height: 125px;
+
+    font-size: 56px;
+
+    direction: ltr;
+
+    top: 20px;
+}
+
+#display p {
+    font-size: 25px;
+    position: fixed;
+
+    top: 55px;
+    left: 55px;
+
+    color: #696767;
+}

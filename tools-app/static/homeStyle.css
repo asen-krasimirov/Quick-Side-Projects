@@ -1,0 +1,52 @@
+
+#homeHeading {
+    font-size: 96px;
+    font-family: "Reem Kufi";
+    top: 32%;
+
+    color: white;
+}
+
+.circleBtn {
+    background: #B2B2B2;
+
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+
+    line-height: 50px;
+    text-align: center;
+    float: left;
+    color: #fff;
+    font-size: 16px;
+    position: relative;
+    font-family: poppins;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    margin-left: 81px;
+}
+
+.circleBtn:hover {
+    margin-top: 0;
+    border: 5px solid white;
+    box-sizing: border-box; /* Include padding and border in element's width and height */
+}
+
+.circleBtn i {
+    font-size: 80px;
+    margin-top: 30px;
+    margin-bottom: 0;
+
+}
+
+.firstHomeBtn {
+    margin-left: 0;
+}
+
+.describe {
+    margin-top: 0;
+
+    text-transform: capitalize;
+    display: block;
+}
