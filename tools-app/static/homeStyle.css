@@ -31,6 +31,7 @@
     margin-top: 0;
     border: 5px solid white;
     box-sizing: border-box; /* Include padding and border in element's width and height */
+    transition: border 0.09s linear;
 }
 
 .circleBtn i {
