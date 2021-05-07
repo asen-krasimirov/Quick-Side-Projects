@@ -1,0 +1,24 @@
+
+#timer {
+    background-color: #B2B2B2;
+
+    width: 624px;
+    height: 335px;
+    border-radius: 61px;
+
+    top: 45%;
+}
+
+#timerPage #display input {
+    height: 107px;
+}
+
+#timerPage .defaultBtn {
+    font-size: 69px;
+
+    width: 200px;
+}
+
+#timerPage #rowOne {
+    top: 70%;
+}
