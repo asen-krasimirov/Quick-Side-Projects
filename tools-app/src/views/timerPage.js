@@ -26,6 +26,7 @@ export function showTimerPage(context) {
 
     let lastTimeValue;
     let globalTimerInterval;
+    let globalAudioInterval;
 
     function onStart() {
         const [hours, minutes, seconds] = display.value.split(":").map(Number);
@@ -39,13 +40,13 @@ export function showTimerPage(context) {
 
     function onRestart() {
         clearInterval(globalTimerInterval);
+        clearInterval(globalAudioInterval);
         display.value = lastTimeValue;
         changeBtnColors(false);
     }
 
     function initializeClock(endtime) {
-        const timeinterval = setInterval(updateClock, 1000);
-        globalTimerInterval = timeinterval;
+        globalTimerInterval = setInterval(updateClock, 1000);;
 
         function updateClock() {
             const t = getTimeRemaining(endtime);
@@ -68,8 +69,8 @@ export function showTimerPage(context) {
     
         if (timeObj.total <= 0) {
             clearInterval(globalTimerInterval);
-            onRestart();
-            
+            globalAudioInterval = setInterval(playBeep, 1000);
+            // onRestart();
         }
     
         return `${hoursSpan}:${minutesSpan}:${secondsSpan}`;
