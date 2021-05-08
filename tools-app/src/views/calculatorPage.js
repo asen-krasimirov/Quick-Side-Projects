@@ -1,11 +1,11 @@
 import { html } from "../lib.js";
 
-const calculatorPageTemplate = () => html`
+const calculatorPageTemplate = ({ onButtonClick }) => html`
 <section id="calculatorPage">
-    <div id="calculator" class="centered">
+    <div id="calculator" class="centered" @click=${onButtonClick}>
         <div id="display">
-            <p>Ans = 0.3333333333333333</p>
-            <input id="input" type="text"  value="2 + 3" readonly>
+            <p id="ans" style="display: none;">Ans = 0.3333333333333333</p>
+            <input id="input" type="text"  value="0" readonly>
         </div>
         <div id="buttonHolder">
             <div id="rowZero" class="centered row">
@@ -23,7 +23,7 @@ const calculatorPageTemplate = () => html`
                 <div class="defaultBtn">4</div>
                 <div class="defaultBtn">5</div>
                 <div class="defaultBtn">6</div>
-                <div class="defaultBtn funcBtn">x</div>
+                <div class="defaultBtn funcBtn">*</div>
             </div>
                 <div id="rowThree" class="centered row">
                 <div class="defaultBtn">1</div>
@@ -42,5 +42,33 @@ const calculatorPageTemplate = () => html`
 </section>`;
 
 export function showCalculatorPage(context) {
-    context.renderContent(calculatorPageTemplate());
+    context.renderContent(calculatorPageTemplate({ onButtonClick }));
+
+    const display = document.getElementById("input");
+    const answerDisplay = document.getElementById("ans");
+    const functionSymbols = ["/", "*", "-", "+"];
+
+    function onButtonClick(event) {
+        if (display.value == "0") display.value = "";
+        let text = event.target.textContent;
+
+        if (text.length > 2) return;
+        if (text == "=") return onEvaluation();
+        if (text == "AC") return onAllClear();
+        if (functionSymbols.includes(text)) text = ` ${text} `;
+
+        display.value = display.value + text;
+    }
+
+    function onAllClear() { display.value = "0"; }
+
+    function onEvaluation() { 
+        display.value = customEval(display.value); 
+        answerDisplay.textContent = `Ans = ${display.value}`;
+        answerDisplay.style.display = "block";
+    }
+
+    function customEval(str) {
+        return Function(`'use strict'; return (${str})`)()
+    }
 }
