@@ -24,9 +24,12 @@ function getTimeRemaining(endtime) {
     };
 }
 
-function makeDeadline(hours=1, minutes=1, seconds=1) {
-    const newDeadline = new Date(Date.parse(new Date()) + 1000 + (hours * 24 * 1000) + (minutes * 60 * 1000) + (seconds * 60  * 1000));  // + {days} * {hours} * {minutes} * {seconds}
-    // const newDeadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+function makeDeadline(hours=0, minutes=0, seconds=0) {
+    hours *= 3600 * 1000;
+    minutes *= 60 * 1000;
+    seconds *= 1000;
+
+    const newDeadline = new Date(Date.parse(new Date()) + 1 * hours + minutes + seconds);  // + {days} * {hours} * {minutes} * {seconds}
     return newDeadline;
 }
 
@@ -44,12 +47,12 @@ function initializeClock(endtime) {
             clearInterval(timeinterval);
         }
 
-        console.log(`days left: ${daysSpan}, hours left: ${hoursSpan}, minutes left: ${minutesSpan}, seconds left: ${secondsSpan}`);
+        console.log(`${hoursSpan}:${minutesSpan}:${secondsSpan}`);
     }
 
     updateClock();
     const timeinterval = setInterval(updateClock, 1000);
 }
 
-const deadline = makeDeadline();
+const deadline = makeDeadline(3, 40);
 initializeClock(deadline);
